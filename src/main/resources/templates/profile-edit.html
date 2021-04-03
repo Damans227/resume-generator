@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <h1 th:text="${userId} + '\'s Profile'">Profile</h1>
+    <div class="container">
+
+    <form action="#" th:action="@{/edit}" th:object="${userProfile}" method="post">
+
+        <div class="form-group">
+            <label>Select your profile theme</label>
+            <select th:field="*{theme}">
+                <option th:each="i : ${#numbers.sequence(1, 3)}" th:value="${i}" th:text="${'Theme ' + i}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" th:field="*{firstName}">
+        </div>
+
+        <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control" th:field="*{lastName}">
+        </div>
+
+        <div class="form-group">
+            <label>Email address</label>
+            <input  class="form-control" th:field="*{email}">
+        </div>
+
+        <div class="form-group">
+            <label>Phone</label>
+            <input class="form-control" th:field="*{phone}">
+        </div>
+
+        <div class="form-group">
+            <label>Designation</label>
+            <input class="form-control" th:field="*{designation}">
+        </div>
+
+        <div class="form-group">
+            <label>Summary</label>
+            <textarea class="form-control" th:field="*{summary}"></textarea>
+        </div>
+
+        <h3>Experience</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Designation</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Current Job?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr th:each="job, stat: *{jobs}">
+                <td><input class="form-control" th:field="*{jobs[__${stat.index}__].company}"></td>
+                <td><input class="form-control" th:field="*{jobs[__${stat.index}__].designation}"></td>
+                <td><input type="date" class="form-control" th:field="*{jobs[__${stat.index}__].startDate}"></td>
+                <td><input type="date" class="form-control" th:field="*{jobs[__${stat.index}__].endDate}"></td>
+                <td><input type="checkbox" class="form-control" th:field="*{jobs[__${stat.index}__].currentJob}"></td>
+                <td><a th:href="@{'./delete?type=job&index=' + ${stat.index}}">Delete</a></td>
+            </tr>
+        </table>
+        <p><a href="./edit?add=job">Add Job</a></p>
+
+
+        <h3>Education</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>College</th>
+                <th>Qualification</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Summary</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tr th:each="education, stat: *{educations}">
+                <td><input class="form-control" th:field="*{educations[__${stat.index}__].college}"></td>
+                <td><input class="form-control" th:field="*{educations[__${stat.index}__].qualification}"></td>
+                <td><input type="date" class="form-control" th:field="*{educations[__${stat.index}__].startDate}"></td>
+                <td><input type="date" class="form-control" th:field="*{educations[__${stat.index}__].endDate}"></td>
+                <td><input class="form-control" th:field="*{educations[__${stat.index}__].summary}"></td>
+                <td><a th:href="@{'./delete?type=education&index=' + ${stat.index}}">Delete</a></td>
+            </tr>
+        </table>
+        <p><a href="./edit?add=education">Add Education</a></p>
+
+        <h3>Skills</h3>
+        <table>
+            <tr th:each="skill, stat: *{skills}">
+                <td><input class="form-control" th:field="*{skills[__${stat.index}__]}"></td>
+                <td><a th:href="@{'./delete?type=skill&index=' + ${stat.index}}">Delete</a></td>
+            </tr>
+        </table>
+        <p><a href="./edit?add=skill">Add Skill</a></p>
+
+    <input type="submit" value="Submit">
+    </form>
+    </div>
+</body>
+</html>
