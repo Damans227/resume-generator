@@ -14,9 +14,9 @@
 
  ## How to use Resume-Generator
 
-1. On the welcome screen, use the following credentials:
-    `user:newton`<br />
-    `password newton`<br />
+1. On the welcome screen, use the following credentials:<br />
+    `user: newton`<br />
+    `password: newton`<br />
 2. Once, you are logged in you can change theme, update given information and then click submit button given at the bottom to save your changes.      
 3. Clicking submit will generate a preview of your HTML resume.  
 
