@@ -48,5 +48,5 @@
 
 ## What the app looks like
 
-![screenshot1](https://raw.githubusercontent.com/Damans227/Screenspace/main/screenshots/screen1.png)
+![screenshot1](https://raw.githubusercontent.com/Damans227/Resume-Generator/main/screenshots/resume-generator.gif)
 
