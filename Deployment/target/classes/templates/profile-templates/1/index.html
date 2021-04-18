@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Joe Bloggs - Curriculum Vitae</title>
+
+<meta name="viewport" content="width=device-width"/>
+<meta name="description" content="The Curriculum Vitae of Joe Bloggs."/>
+<meta charset="UTF-8"> 
+
+<link type="text/css" rel="stylesheet" href="../profile-templates/1/style.css">
+<link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body id="top">
+<div id="cv" class="instaFade">
+	<div class="mainDetails">
+
+		
+		<div id="name">
+			<h1 class="quickFade delayTwo">
+				<span th:text="${userProfile.firstName}">Joe</span>
+				<span th:text="${userProfile.lastName}">Bloggs</span>
+				<a th:if="${currentUsersProfile}" href="/edit">Edit</a>
+			</h1>
+			<h2 class="quickFade delayThree" th:text="${userProfile.designation}">Job Title</h2>
+		</div>
+		
+		<div id="contactDetails" class="quickFade delayFour">
+			<ul>
+				<li>e: <span th:text="${userProfile.email}">joe@bloggs.com</span></li>
+				<li>m: <span th:text="${userProfile.phone}">01234567890</span></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<div id="mainArea" class="quickFade delayFive">
+		<section>
+			<article>
+				<div class="sectionTitle">
+					<h1>Personal Profile</h1>
+				</div>
+				
+				<div class="sectionContent">
+					<p th:text="${userProfile.summary}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dolor metus, interdum at scelerisque in, porta at lacus. Maecenas dapibus luctus cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim. Vestibulum bibendum mattis dignissim. Proin id sapien quis libero interdum porttitor.</p>
+				</div>
+			</article>
+			<div class="clear"></div>
+		</section>
+		
+		
+		<section>
+			<div class="sectionTitle">
+				<h1>Work Experience</h1>
+			</div>
+			
+			<div class="sectionContent" th:each="job : ${userProfile.jobs}">
+				<article>
+					<h2><span th:text="${job.designation}">Job Title</span> at <span th:text="${job.company}">Company</span></h2>
+					<p class="subDetails">
+						<span th:text="${job.formattedStartDate}">April 2011</span> -
+						<span th:text="${job.currentJob}? 'Present' : ${job.formattedEndDate}">Present</span></p>
+					<ul th:each="responsibility : ${job.responsibilities}">
+						<li th:text="${responsibility}">Responsibility</li>
+					</ul>
+				</article>
+			</div>
+			<div class="clear"></div>
+		</section>
+		
+		
+		<section>
+			<div class="sectionTitle">
+				<h1>Key Skills</h1>
+			</div>
+			
+			<div class="sectionContent">
+				<ul class="keySkills" th:each="skill : ${userProfile.skills}">
+					<li th:text="${skill}">A Key Skill</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</section>
+		
+		
+		<section>
+			<div class="sectionTitle">
+				<h1>Education</h1>
+			</div>
+			
+			<div class="sectionContent" th:each="education : ${userProfile.educations}">
+				<article>
+					<h2 th:text="${education.college}">College/University</h2>
+					<p class="subDetails" th:text="${education.qualification}">Qualification</p>
+					<p th:text="${education.summary}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim.</p>
+				</article>
+
+			</div>
+			<div class="clear"></div>
+		</section>
+		
+	</div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3753241-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
